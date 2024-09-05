@@ -1,0 +1,95 @@
+{% extends 'chat/base.html' %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+{% load static %}
+<head>
+	<script src="{% static 'chat.js' %}"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+		@media (max-width: 1000px) {
+			.navbarB {
+				display: none;
+			}
+			.navbarL {
+				display: flex;
+			}
+		}
+
+		@media (min-width: 1001px) {
+			.navbarB {
+				display: flex;
+			}
+			.navbarL {
+				display: none;
+			}
+		}
+		</style>
+</head>
+	<div class="container" class="centered-element" style="margin-left: auto;margin-right: auto;">
+		<h2 h2 style="display:flex;  display: flex;align-items: center;justify-content: center;">Chat Home Page</h2>
+		<ul id="list">
+			{% for group in groups %}
+			<div id="{{ group.uuid }}">
+				<span>Room name : {{ group.name }}</span> <br>
+				{% if request.user in group.members.all %}
+					<button id="leave-{{ group.uuid }}" class="group_option btn btn-outline-dark" value="leave_group {{ group.uuid }}">Leave</button>
+				{% else %}
+					<button id="join-{{ group.uuid }}" class="group_option btn btn-outline-dark" value="join_group {{ group.uuid }}">Join</button>
+				{% endif %}
+				{% if request.user in group.members.all %}
+					<button id="open-{{ group.uuid }}" class="group_option btn btn-outline-dark" value="open_group {{ group.uuid }}">Open</button>
+				{% endif %}
+					<button id="delete-{{ group.uuid }}" class="group_option btn btn-outline-dark" value="delete_group {{ group.uuid }}">Delete</button>
+				</div>
+				{% endfor %}
+			</ul>
+			<button id="add-group" class="group_option btn btn-outline-dark" value="add_group">Add Group</button>
+			<a class="btn btn-outline-primary" role="button" aria-disabled="true" onclick="loadHomepage()">Homepage</a>
+	</div>
+</body>
+
+    <style>
+        .button-link {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #df00f3;
+            text-decoration: none;
+        }
+        .container
+        {
+        background-color: rgb(255, 255, 255);
+        width: 600px;
+        height: 600px;
+        border: 1px black solid;
+        border-radius: 8px;
+        box-shadow: 10px 5px 5px #0d6efd;
+        }
+
+        .centered-element
+        {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 15px;
+        width: 120px;
+        }
+
+
+    </style>
+<script>
+	var homepageUrl4 = "{% url 'ft_transcendenceLAJ' %}";
+	window.addEventListener('load', function(event)
+	{
+		window.location.href = homepageUrl4;
+	});
+</script>
+{% endblock content %}

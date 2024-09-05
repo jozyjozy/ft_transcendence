@@ -1,0 +1,30 @@
+{% load static %}
+<head>
+	<script src="{% static 'pongPVP Tournement.js' %}"></script>
+</head>
+<body>
+    <div id="user-data" data-username="{{ username }}"></div> 
+    <div style="display: flex;">
+        <div style="width:20%;"></div>
+        <div style="width:30%; display:flex;">
+            <h2 style="color:black;" id="player1_name"></h2>
+			<span id="player1_scoreD" style="color:white; margin-left: 10px;"></span>
+        </div>
+        <div style="width:20%;"></div>
+        <div style="width:30%; display:flex;">
+            <h2 style="color:black;" id="player2_name"></h2>
+			<span id="player2_scoreD" style="color:white; margin-left: 10px;"></span>
+        </div>
+    </div>
+    <div class="container" style="margin-left: auto; margin-right: auto;">
+        <canvas id="pongCanvas" width="775" height="500"></canvas>
+    </div>
+</body>
+</html>
+<script>
+	var homepageUrl8 = "{% url 'ft_transcendenceLAJ' %}";
+	window.addEventListener('load', function(event)
+	{
+		window.location.href = homepageUrl8;
+	});
+</script>

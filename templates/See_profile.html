@@ -1,0 +1,28 @@
+{% load static %}
+<div class="container" style="margin-left: auto; margin-right: auto;">
+    <h2 style="text-align: center;">Profile of {{ profile.user.username }}</h2>
+    {% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" style="border-radius:8px;width:150px;height:150px;margin: auto;display: block;" alt="Profile Picture">
+    <div style="height: 10px;"></div>
+    {% else %}
+    <p>No profile picture uploaded.</p>
+    <div style="height: 10px;"></div>
+    {% endif %}
+    <p style="width:700px;max-width:90%;overflow:hidden;">Coalition: {{ profile.coalition }}</p>
+    <p style="width:700px;max-width:90%;overflow:hidden;">Email: {{ profile.user.email }}</p>
+    <p style="width:700px;max-width:90%;overflow:hidden;">Bio: {{ profile.bio }}</p>
+    <pre style="width:700px;max-width:90%;overflow:hidden;padding-left:10px;font-family:Helvetica;">History: {{ profile.history}} </pre>
+
+    {% if not profile.user == request.user %}
+    <div id="buttonContainer" style="margin-top: 20px;">
+        {% if profile in request.user.profile.blockers.all %}
+            <button id="unblockBtn" onclick="unblockUser({{ profile.id }})">Unblock</button>
+        {% elif profile in request.user.profile.friend.all %}
+            <button id="removeFriendBtn" onclick="removeFriend({{ profile.id }})">Remove Friend</button>
+        {% else %}
+            <button id="addFriendBtn" onclick="addFriend({{ profile.id }})">Add Friend</button>
+            <button id="blockBtn" onclick="blockUser({{ profile.id }})">Block</button>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>

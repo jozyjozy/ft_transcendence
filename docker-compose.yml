@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  django:
+    image: django
+    container_name: django
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    expose:
+      - "8000"
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    container_name : "redis"
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8443:443"
+    depends_on:
+      - django

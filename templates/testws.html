@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <div id="messages"></div>
+    <form id="message-form">
+        <input type="text" id="message-input" placeholder="Enter your message">
+        <button type="submit">Send</button>
+    </form>
+    <script>
+
+
+    const websocket = new WebSocket( "ws:127.0.0.1:8000" )
+    console.log(websocket)
+    websocket.onopen = function(event){
+        console.log('client says connection opened')
+        websocket.send("Client sends Welcome")
+    }
+    function Send (){
+        msg = document.getElementById('message-input');
+        websocket.send(msg)
+    }
+    websocket.onmessage = function(event){
+        console.log("client says server message received: ", event)
+    }
+
+
+    </script> 
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% load static %}
+<style>
+.container-profile
+{
+max-width: 80%;
+background-color: rgb(255, 255, 255);
+width: 800px;
+border: 1px black solid;
+border-radius: 8px;
+box-shadow: 10px 5px 5px #df00f3;
+}
+</style>
+<div class="container-profile" style="margin-left: auto;margin-right: auto;">
+    <h2 style="text-align: center;">Profile of {{ profile.user.username }}</h2>
+    {% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" style="border-radius:8px;width:150px;height:150px;margin: auto;display: block;" alt="Profile Picture">
+    <div style="height: 10px;"></div>
+    {% else %}
+        <p>No profile picture uploaded.</p>
+        <div style="height: 10px;"></div>
+    {% endif %}
+    <p style="width:700px;max-width:90%;overflow:hidden;padding-left:10px;">Coalition: {{ profile.coalition}} </p>
+    <pre style="width:700px;max-width:90%;overflow:hidden;padding-left:10px;font-family:Helvetica;">History: {{ profile.history}} </pre>
+    <p style="width:700px;max-width:90%;overflow:hidden;padding-left:10px;">Email: {{ profile.user.email }}</p>
+    <p style="width:700px;max-width:90%;overflow:hidden;padding-left:10px;">Bio: {{ profile.bio }}</p>
+    <div style="height: 10px;"></div>
+    <div style="display:flex;justify-content: center;align-items: center;">
+        <a class="btn btn-outline-dark" role="button" aria-disabled="true" onclick="loadHomepage()">Homepage</a>
+        <span style="width:10px;"></span>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-primary" role="button" aria-disabled="true" type="submit">Logout</button>
+        </form>
+    </div>
+    <div style="height: 10px;"></div>
+</div>
+<script>
+var homepageUrl = "{% url 'ft_transcendenceLAJ' %}";
+window.addEventListener('load', function(event)
+{
+    window.location.href = homepageUrl;
+});
+</script>

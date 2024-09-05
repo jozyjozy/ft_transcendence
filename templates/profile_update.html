@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'homepage.css' %}">
+    <style>
+    .container-profile
+    {
+        max-width: 80%;
+        background-color: rgb(255, 255, 255);
+        width: 800px;
+        border: 1px black solid;
+        border-radius: 8px;
+        box-shadow: 10px 5px 5px #df00f3;
+    }
+</style>
+</head>
+<body>
+    <div class="container-profile" style="margin-left: auto; margin-right: auto;">
+        <h2 style="text-align: center;">Update Profile</h2>
+        <form id="profile-update-form" method="POST" enctype="multipart/form-data" style="margin-left: 10px;">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <div style="height: 10px;"></div>
+            <button style="display: block; margin-left: auto; margin-right: auto;" class="btn btn-primary" role="button" aria-disabled="true" type="submit">Update</button>
+            <div style="height: 10px;"></div>
+        </form>
+        <div id="form-errors" style="color: red; text-align: center;"></div>
+    </div>
+    <script src="{% static 'update_profile.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'homepage.css' %}">
+</head>
+<body>
+	<div class="container" style="margin-left: auto; margin-right: auto;">
+		<h2 style="text-align: center;">Register</h2>
+		<form method="post" id="register-form">
+			{% csrf_token %}
+			{{ user_form.as_p }}
+			<button style="display: block; margin-left: auto; margin-right: auto;" class="btn btn-primary" role="button" aria-disabled="true" type="submit">Register</button>
+		</form>
+		<div id="form-errors" style="color: red;"></div>
+	</div>
+	<script src="{% static 'register.js' %}"></script>
+</body>
+</html>
